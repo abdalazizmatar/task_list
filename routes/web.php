@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 Route::get('/', function () {
     return view('welcome');
@@ -28,3 +30,17 @@ Route::post('/about' , function(){
 
     return view(view: 'about',data: compact('name' , 'departments'));
 });
+
+Route::get('/courses', function () {
+    return view('courses');
+});
+
+Route::post('/store', function (Request $request) {
+
+    DB::table('courses')->insert([
+        'name' => $request->name
+    ]);
+
+    return view('courses');
+});
+
